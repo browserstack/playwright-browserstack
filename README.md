@@ -61,7 +61,7 @@ BrowserStack Playwright tests in beta supports the following browsers across the
 
 **The bundled browser version that will be used to run your test is the same that comes bundled with the Playwright version**. Supported Playwright versions and the option to specify them is given in a later section of this page.
 
-**Note**: You can also run your tests in any of the mobile `devices` that Playwright supports for emulation. You can find the [sample code for running in an iPhone emulator](https://github.com/sourav-kundu/playwright-browserstack/blob/master/sample_test_on_iPhone.js) and the [sample for running on Pixel](https://github.com/sourav-kundu/playwright-browserstack/blob/master/sample_test_on_Pixel.js). The complete list of `devices` supported by Playwright can be found [here](https://github.com/microsoft/playwright/blob/master/src/server/deviceDescriptors.js)
+**Note**: You can also run your tests in any of the mobile `devices` that Playwright supports for emulation. You can find the [sample code for running in an iPhone emulator](https://github.com/browserstack/playwright-browserstack/blob/master/sample_test_on_iPhone.js) and the [sample for running on Pixel](https://github.com/browserstack/playwright-browserstack/blob/master/sample_test_on_Pixel.js). The complete list of `devices` supported by Playwright can be found [here](https://github.com/microsoft/playwright/blob/master/src/server/deviceDescriptors.js)
 
 ### OS (with versions) supported
 1. Windows 10 (`'os': 'Windows', 'os_version': '10'`)
@@ -88,7 +88,7 @@ You can see the [documentation for marking test status using REST API](https://w
 
 If you are using Jest to run your Playwright tests, you can run all your playwright-jest tests on BrowserStack as well. Follow the steps below to run the sample tests in this repository:
 
-1. Clone this repository using `git clone https://github.com/sourav-kundu/playwright-browserstack.git` (if not already done).
+1. Clone this repository using `git clone https://github.com/browserstack/playwright-browserstack.git` (if not already done).
 2. Go inside the directory playwright-jest using `cd playwright-jest`
 3. Install the dependencies using `npm install`
 4. Put in your credentials in the file `jest-playwright.config.js` in the capabilities part.
@@ -97,4 +97,4 @@ If you are using Jest to run your Playwright tests, you can run all your playwri
 
 ## Facing issues?
 
-If you are facing any issue with any of the above or any other issue in trying to run your Playwright tests on BrowserStack, you can reach out to me directly at `sourav.k@browserstack.com` and I will be happy to debug your issues or at the least ensure that your issue becomes our top priority to resolve.
+If you are facing any issue with any of the above or any other issue in trying to run your Playwright tests on BrowserStack, you can [reach out to support](https://www.browserstack.com/contact#technical-support), select product as `Automate` and post your query there.
