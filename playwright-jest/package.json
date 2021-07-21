@@ -1,0 +1,16 @@
+{
+  "name": "playwright-jest",
+  "version": "1.0.0",
+  "description": "Sample package to show jest playwright tests run on BrowserStack",
+  "main": "sample.spec.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Sourav Kundu",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^27.0.3",
+    "jest-playwright-preset": "^1.6.0",
+    "playwright": "^1.11.1"
+  }
+}

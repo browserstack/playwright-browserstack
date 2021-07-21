@@ -1,0 +1,17 @@
+{
+  "devDependencies": {
+    "browserstack-local": "^1.4.8",
+    "playwright": "^1.10.0"
+  },
+  "dependencies": {
+    "chai": "^4.3.4"
+  },
+  "scripts": {
+    "test": "npm run single && npm run local && npm run parallel && npm run mobile",
+    "single": "node google_search.js",
+    "local": "node local_test_using_bindings.js",
+    "parallel": "node parallel_test.js",
+    "mobile": "node sample_test_on_iPhone.js && node sample_test_on_Pixel.js",
+    "session_details": "node sample_session_details_API.js"
+  }
+}
