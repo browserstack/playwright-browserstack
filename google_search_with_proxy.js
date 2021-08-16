@@ -42,4 +42,3 @@ bootstrap();
     }
     await browser.close();
   })();
-  
