@@ -97,6 +97,19 @@ If you are using Jest to run your Playwright tests, you can run all your playwri
 5. If you are trying to run your own Jest tests on BrowserStack, then you need to ensure that you have configured the `connectOptions` and `browsers` as shown in the `module.exports` of the config file.
 6. Run the sample jest script using `npm test` which runs the test `google.test.js` across 3 browsers in BrowserStack serially. Your can also configure Jest to run your tests in parallel.
 
+## Playwright with Test Runner
+
+If you are using Playwright Test Runner to run your Playwright tests, you can run all your playwright-test tests on BrowserStack as well. Follow the steps below to run the sample tests in this repository:
+
+1. Clone this repository using `git clone https://github.com/browserstack/playwright-browserstack.git` (if not already done).
+2. Go inside the directory playwright-test using `cd playwright-test`
+3. Install the dependencies using `npm install`
+4. Put in your credentials in the file `fixtures.js` in the caps part.
+5. If you are trying to run your own tests on BrowserStack, then you need to ensure that you have configured the `projects` correctly in `playwright.config.js` file.
+6. Run the sample test script using `npm run test` which runs all the tests inside tests directory across 5 browsers in BrowserStack.
+7. Run the sample test script using `npm run test:local` and add `browserstack.local:true` in the file `fixture.js` in caps part which runs all the tests inside tests directory across 5 browsers in BrowserStack.
+8. If you want to run your tests locally, you just need to configure the `projects` without name `@browserstack` in `playwright.config.js` file.
+
 ## Facing issues?
 
 If you are facing any issue with any of the above or any other issue in trying to run your Playwright tests on BrowserStack, you can [reach out to support](https://www.browserstack.com/contact#technical-support), select product as `Automate` and post your query there.
