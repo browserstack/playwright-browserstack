@@ -1,4 +1,3 @@
-// example.spec.js
 const { test } = require('../fixtures');
 const { expect } = require('@playwright/test');
 test.describe('feature foo', () => {

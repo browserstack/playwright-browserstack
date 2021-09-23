@@ -106,7 +106,7 @@ If you are using Playwright Test Runner to run your Playwright tests, you can ru
 3. Install the dependencies using `npm install`
 4. Put in your credentials in the file `fixtures.js` in the caps part.
 5. If you are trying to run your own tests on BrowserStack, then you need to ensure that you have configured the `projects` correctly in `playwright.config.js` file.
-6. Run the sample test script using `npm run test` which runs all the tests inside tests directory across 5 browsers in BrowserStack.
+6. Run the sample test script using `npm test` which runs all the tests inside tests directory across 5 browsers in BrowserStack.
 7. Run the sample test script using `npm run test:local` and add `browserstack.local:true` in the file `fixture.js` in caps part which runs all the tests inside tests directory across 5 browsers in BrowserStack.
 8. If you want to run your tests locally, you just need to configure the `projects` without name `@browserstack` in `playwright.config.js` file.
 

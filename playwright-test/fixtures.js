@@ -40,6 +40,9 @@ const patchCaps = (name) => {
   caps.name = name;
 };
 
+const isHash = (entity) => Boolean(entity && typeof(entity) === "object" && !Array.isArray(entity));
+const nestedKeyValue = (hash, keys) => keys.reduce((hash, key) => (isHash(hash) ? hash[key] : undefined), hash);
+
 exports.test = base.test.extend({
   browser: async ({ playwright, browser }, use, workerInfo) => {
     if (workerInfo.project.name.match(/browserstack/)) {
@@ -62,7 +65,7 @@ exports.test = base.test.extend({
         action: 'setSessionStatus',
         arguments: {
           status: testInfo.status,
-          reason: testInfo?.error?.message,
+          reason: nestedKeyValue(testInfo, ['error', 'message'])
         },
       };
       await vPage.evaluate(() => {},
