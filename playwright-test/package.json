@@ -8,7 +8,7 @@
   "description": "Sample package to show jest playwright tests run on BrowserStack",
   "scripts": {
     "test": "npx playwright test --config=./playwright.config.js",
-    "test:local": "npx playwright test --config=./playwright-local.config.js"
+    "test:local": "BROWSERSTACK_LOCAL=true npx playwright test --config=./playwright-local.config.js"
   },
   "devDependencies": {
     "playwright": "^1.13.1",

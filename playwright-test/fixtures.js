@@ -7,6 +7,7 @@ const clientPlaywrightVersion = cp
   .split(' ')[1];
 const BrowserStackLocal = require('browserstack-local');
 
+// BrowserStack Specific Capabilities.
 const caps = {
   browser: 'chrome',
   os: 'osx',
@@ -16,6 +17,7 @@ const caps = {
   'browserstack.username': process.env.BROWSERSTACK_USERNAME || 'YOUR_USERNAME',
   'browserstack.accessKey':
     process.env.BROWSERSTACK_ACCESS_KEY || 'YOUR_ACCESS_KEY',
+  'browserstack.local': process.env.BROWSERSTACK_LOCAL || false,
   'client.playwrightVersion': clientPlaywrightVersion,
 };
 
@@ -26,6 +28,7 @@ exports.BS_LOCAL_ARGS = {
   key: process.env.BROWSERSTACK_ACCESS_KEY || 'YOUR_ACCESS_KEY',
 };
 
+// Patching the capabilities dynamically according to the project name.
 const patchCaps = (name) => {
   let combination = name.split(/@browserstack/)[0];
   let [browerCaps, osCaps] = combination.split(/:/);
@@ -45,6 +48,7 @@ const nestedKeyValue = (hash, keys) => keys.reduce((hash, key) => (isHash(hash) 
 
 exports.test = base.test.extend({
   browser: async ({ playwright, browser }, use, workerInfo) => {
+    // Use BrowserStack Launched Browser according to capabilities for cross-browser testing.
     if (workerInfo.project.name.match(/browserstack/)) {
       patchCaps(workerInfo.project.name);
       const vBrowser = await playwright.chromium.connect({
@@ -54,10 +58,12 @@ exports.test = base.test.extend({
       });
       await use(vBrowser);
     } else {
+      // Use Local Browser for testing.
       await use(browser);
     }
   },
   page: async ({ page, browser }, use, testInfo) => {
+    // Overriding page function to mark the status on BrowserStack.
     if (testInfo.project.name.match(/browserstack/)) {
       const vPage = await browser.newPage();
       await use(vPage);
@@ -70,6 +76,7 @@ exports.test = base.test.extend({
       };
       await vPage.evaluate(() => {},
       `browserstack_executor: ${JSON.stringify(testResult)}`);
+      await vPage.close();
     } else {
       use(page);
     }

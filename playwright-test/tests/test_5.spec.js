@@ -6,10 +6,10 @@ test.describe('feature foo', () => {
     await page.goto('https://www.google.com/ncr');
     const element = await page.$('[aria-label="Search"]');
     await element.click();
-    await element.type('BrowserStack');
+    await element.type('BrowserStack Local');
     await element.press('Enter');
     const title = await page.title('');
     console.log(title);
-    expect(title).toEqual( 'BrowserStack - Google Search', 'Expected page title is incorrect!');
+    expect(title).toEqual( 'BrowserStack Local - Google Search', 'Expected page title is incorrect!');
   });
 });

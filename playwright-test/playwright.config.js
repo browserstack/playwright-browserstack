@@ -7,6 +7,9 @@ const config = {
   testDir: 'tests',
   testMatch: '**/*.spec.js',
   timeout: 60000,
+  use:{
+    viewport: null
+  },
   projects: [
     // -- BrowserStack Projects --
     // name should be of the format browser@browser_version:os os_version@browserstack
@@ -27,15 +30,13 @@ const config = {
     {
       name: 'edge@90:Windows 10@browserstack',
       use: {
-        browserName: 'chromium',
-        viewport: { width: 1280, height: 1024 }
+        browserName: 'chromium'
       },
     },
     {
       name: 'playwright-firefox@latest:OSX Catalina@browserstack',
       use: {
         browserName: 'firefox',
-        viewport: null,
         ignoreHTTPSErrors: true
       },
     },
@@ -43,8 +44,8 @@ const config = {
       name: 'playwright-webkit@latest:OSX Big Sur@browserstack',
       use: {
         browserName: 'webkit',
-        ...devices['iPhone 12 Pro Max'],
-        viewport: { width: 1280, height: 1024 },
+        // Config to use playwright emulated devices.
+        // ...devices['iPhone 12 Pro Max'],
       },
     },
     // -- Local Projects --

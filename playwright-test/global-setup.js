@@ -1,16 +1,24 @@
 // global-setup.js
 const { bsLocal, BS_LOCAL_ARGS } = require('./fixtures');
-let localStarted = false;
 const { promisify } = require('util');
 const sleep = promisify(setTimeout);
-module.exports = async (config) => {
+const redColour = '\x1b[31m';
+const whiteColour = '\x1b[0m';
+module.exports = async () => {
   console.log('Starting BrowserStackLocal ...');
   // Starts the Local instance with the required arguments
-  bsLocal.start(BS_LOCAL_ARGS, (callback) => {
-    console.log('BrowserStackLocal Started');
-    localStarted = true;
+  let localResponseReceived = false;
+  bsLocal.start(BS_LOCAL_ARGS, (err) => {
+    if (err) {
+      console.error(
+        `${redColour}Error starting BrowserStackLocal${whiteColour}`
+      );
+    } else {
+      console.log('BrowserStackLocal Started');
+    }
+    localResponseReceived = true;
   });
-  while (!localStarted) {
+  while (!localResponseReceived) {
     await sleep(1000);
   }
 };
