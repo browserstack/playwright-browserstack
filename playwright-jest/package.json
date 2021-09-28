@@ -11,6 +11,6 @@
   "devDependencies": {
     "jest": "^27.0.3",
     "jest-playwright-preset": "^1.6.0",
-    "playwright": "1.13.1"
+    "playwright": "~1.13.1"
   }
 }
