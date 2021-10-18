@@ -72,7 +72,7 @@ BrowserStack Playwright tests in beta supports the following browsers across the
 ### Playwright versions supported
 
 Currently, we are supporting 2 Playwright versions.
-Playwright version can be specified using a capability for e.g.: `'browserstack.playwrightVersion': '1.12.3'`. If you do not specify a value for this capability then your tests would run on the latest version that is supported on the BrowserStack platform.
+Playwright version can be specified using a capability for e.g.: `'browserstack.playwrightVersion': '1.14.1'`. If you do not specify a value for this capability then your tests would run on the latest version that is supported on the BrowserStack platform.
 
 We recommend you to pass the capability value as `'browserstack.playwrightVersion': '1.latest'` or `1.latest-1` to signify the 2 latest versions within the major version `1`. If you pass this capability, then you can be rest assured that whichever are the latest versions on BrowserStack, your tests would run on that without you needing to change your test code often.
 
