@@ -9,11 +9,7 @@ This guide walks you through running a sample Playwright test on BrowserStack an
 
 ## Pre-requisites
 
-You need BrowserStack credentials to be able to run Playwright tests and also you need to be included in the Beta group so that we can enable Playwright access for you in our infra while the integration is in closed-beta.
-
-If you have already been included in the beta group, proceed ahead. Else, you can [reach out to support](https://www.browserstack.com/contact#technical-support) to get included in the beta group.
-
-You have to replace `YOUR_USERNAME` and `YOUR_ACCESS_KEY` in the sample scripts in this repository with your BrowserStack credentials which can be found in your [Account Settings](https://www.browserstack.com/accounts/settings) page.
+You need BrowserStack credentials to be able to run Playwright tests. You have to replace `YOUR_USERNAME` and `YOUR_ACCESS_KEY` in the sample scripts in this repository with your BrowserStack credentials which can be found in your [Account Settings](https://www.browserstack.com/accounts/settings) page.
 
 **Alternatively, you can set the environment variables `BROWSERSTACK_USERNAME` and `BROWSERSTACK_ACCESS_KEY` with your credentials and all the scripts in this repository should work fine**
 
