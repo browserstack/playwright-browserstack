@@ -1,7 +1,7 @@
 const { test } = require('../fixtures');
 const { expect } = require('@playwright/test');
 test.describe('feature foo', () => {
-  test('my test', async ({ page }) => {
+  test('test 1', async ({ page }) => {
     // Assertions use the expect API.
     await page.goto('https://www.google.com/ncr');
     const element = await page.$('[aria-label="Search"]');

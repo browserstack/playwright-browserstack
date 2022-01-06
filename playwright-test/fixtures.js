@@ -29,7 +29,7 @@ exports.BS_LOCAL_ARGS = {
 };
 
 // Patching the capabilities dynamically according to the project name.
-const patchCaps = (name) => {
+const patchCaps = (name, title) => {
   let combination = name.split(/@browserstack/)[0];
   let [browerCaps, osCaps] = combination.split(/:/);
   let [browser, browser_version] = browerCaps.split(/@/);
@@ -40,32 +40,23 @@ const patchCaps = (name) => {
   caps.browser_version = browser_version ? browser_version : 'latest';
   caps.os = os ? os : 'osx';
   caps.os_version = os_version ? os_version : 'catalina';
-  caps.name = name;
+  caps.name = title;
 };
 
 const isHash = (entity) => Boolean(entity && typeof(entity) === "object" && !Array.isArray(entity));
 const nestedKeyValue = (hash, keys) => keys.reduce((hash, key) => (isHash(hash) ? hash[key] : undefined), hash);
 
 exports.test = base.test.extend({
-  browser: async ({ playwright, browser }, use, workerInfo) => {
+  page: async ({ page, playwright }, use, testInfo) => {
     // Use BrowserStack Launched Browser according to capabilities for cross-browser testing.
-    if (workerInfo.project.name.match(/browserstack/)) {
-      patchCaps(workerInfo.project.name);
+    if (testInfo.project.name.match(/browserstack/)) {
+      patchCaps(testInfo.project.name, `${testInfo.file} - ${testInfo.title}`);
       const vBrowser = await playwright.chromium.connect({
         wsEndpoint:
           `wss://cdp.browserstack.com/playwright?caps=` +
           `${encodeURIComponent(JSON.stringify(caps))}`,
       });
-      await use(vBrowser);
-    } else {
-      // Use Local Browser for testing.
-      await use(browser);
-    }
-  },
-  page: async ({ page, browser }, use, testInfo) => {
-    // Overriding page function to mark the status on BrowserStack.
-    if (testInfo.project.name.match(/browserstack/)) {
-      const vPage = await browser.newPage();
+      const vPage = await vBrowser.newPage();
       await use(vPage);
       const testResult = {
         action: 'setSessionStatus',
@@ -77,6 +68,7 @@ exports.test = base.test.extend({
       await vPage.evaluate(() => {},
       `browserstack_executor: ${JSON.stringify(testResult)}`);
       await vPage.close();
+      await vBrowser.close();
     } else {
       use(page);
     }
