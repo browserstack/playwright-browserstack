@@ -11,8 +11,8 @@
     "test:local": "BROWSERSTACK_LOCAL=true npx playwright test --config=./playwright-local.config.js"
   },
   "devDependencies": {
-    "playwright": "~1.14.1",
-    "@playwright/test": "~1.14.1",
+    "playwright": "~1.17.2",
+    "@playwright/test": "~1.17.2",
     "browserstack-local": "^1.4.8"
   }
 }
