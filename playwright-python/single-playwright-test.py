@@ -30,6 +30,8 @@ with sync_playwright() as playwright:
   except:
       page.evaluate("_ => {}", "browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"failed\", \"reason\": \" Title did not match\"}}");
   
-  browser.close()
+  browser.close() 
+
+
 
   
