@@ -11,7 +11,7 @@ namespace PlaywrightTesting
             {
                 case "single":
                     Console.WriteLine("Running Single Test");
-                    await PlaywrightSingleTest.main(args);  // redirects to class main() method
+                    await PlaywrightTest.main(args);  // redirects to class main() method
                     break;
                 case "parallel":
                     Console.WriteLine("Running Parallel Test");
@@ -23,7 +23,7 @@ namespace PlaywrightTesting
                     break;
                 default:
                     Console.WriteLine("Running Single Test by default");
-                    await PlaywrightSingleTest.main(args);
+                    await PlaywrightTest.main(args);
                     break;
             }
         }
