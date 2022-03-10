@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.microsoft.playwright.*;
 import java.net.URLEncoder;
 
-public class PlaywrightLocalTest {
+public class PlaywrightTest {
     public static void main(String[] args) {
         try (Playwright playwright = Playwright.create()) {
             JsonObject capabilitiesObject = new JsonObject();
@@ -12,13 +12,12 @@ public class PlaywrightLocalTest {
             capabilitiesObject.addProperty("browser_version", "latest");
             capabilitiesObject.addProperty("os", "osx");
             capabilitiesObject.addProperty("os_version", "catalina");
-            capabilitiesObject.addProperty("name", "Playwright first local test");
-            capabilitiesObject.addProperty("build", "playwright-java-3");
+            capabilitiesObject.addProperty("name", "Playwright first single test");
+            capabilitiesObject.addProperty("build", "playwright-java-1");
             capabilitiesObject.addProperty("browserstack.username", "BROWSERSTACK_USERNAME");
             capabilitiesObject.addProperty("browserstack.accessKey", "BROWSERSTACK_ACCESS_KEY");
-            capabilitiesObject.addProperty("browserstack.local", "true");
-
-            BrowserType chromium = playwright.chromium();
+            
+            BrowserType chromium = playwright.chromium(); 
             String caps = URLEncoder.encode(capabilitiesObject.toString(), "utf-8");
             String ws_endpoint = "wss://cdp.browserstack.com/playwright?caps=" + caps;
             Browser browser = chromium.connect(ws_endpoint);
@@ -37,6 +36,7 @@ public class PlaywrightLocalTest {
                 } else {
                     markTestStatus("failed", "Title did not match", page);
                 }
+                
             } catch (Exception err) {
                 markTestStatus("failed", err.getMessage(), page);
             }

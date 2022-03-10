@@ -1,9 +1,8 @@
 using Microsoft.Playwright;
 using System;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Collections;
 
 class PlaywrightParallelTest
 {
@@ -11,40 +10,80 @@ class PlaywrightParallelTest
     {
         //  The following capability variables contains the set of os/browser environments where you want to run your tests. You can choose to alter this list according to your needs. Read more on https://browserstack.com/docs/automate/playwright/browsers-and-os
         try {
-            // allowed browsers are `chrome`, `edge`, `playwright-chromium`, `playwright-firefox` and `playwright-webkit`
-            // browser_version capability is valid only for branded `chrome` and `edge` browsers and you can specify any browser version like `latest`, `latest-beta`, `latest-1` and so on.
-            var combination1 = SampleTestCase("playwright-chromium", "latest", "osx", "Catalina", "macOS Catalina - Chrome latest", "Parallel-build-2"); 
-            var combination2 = SampleTestCase("chrome", "latest", "osx", "catalina", "Branded Google Chrome on Catalina", "Parallel-build-2");
-            var combination3 = SampleTestCase("edge", "latest", "osx", "catalina", "Branded Microsoft Edge on Catalina", "Parallel-build-2");
-            var combination4 = SampleTestCase("playwright-firefox", "latest", "osx", "catalina", "Playwright firefox on Catalina", "Parallel-build-2");
-            var combination5 = SampleTestCase("playwright-webkit", "latest", "osx", "catalina", "Playwright webkit on Catalina", "Parallel-build-2");
-            
-            //Executing the methods
-            await Task.WhenAll(combination1, combination2, combination3, combination4, combination5);
+            ArrayList capabilitiesList = getCapabilitiesList();
+            Task[] taskList = new Task[capabilitiesList.Count]; 
+
+            for (int i = 0; i < capabilitiesList.Count; i++)
+            {
+                string capsJson;
+                capsJson = JsonConvert.SerializeObject(capabilitiesList[i]);
+                var task = Executetestwithcaps(capsJson);
+                taskList[i] = task;
+            }
+
+            await Task.WhenAll(taskList);
+
         } catch (Exception e) {
             Console.WriteLine(e);
         }
     }
-    static async Task SampleTestCase(String browser_name, String browser_version, String os, String os_version, String test_name, String build_name)
+    static ArrayList getCapabilitiesList()
     {
-        Dictionary<string, string> browserstackOptions = new Dictionary<string, string>();
-        string capsJson;
+        ArrayList capabilitiesList = new ArrayList(); 
 
-        try {
-            browserstackOptions.Add("build", build_name);
-            browserstackOptions.Add("name", test_name);
-            browserstackOptions.Add("os", os);
-            browserstackOptions.Add("os_version", os_version);
-            browserstackOptions.Add("browser", browser_name);
-            browserstackOptions.Add("browser_version", browser_version);
-            browserstackOptions.Add("browserstack.username", "BROWSERSTACK_USERNAME");
-            browserstackOptions.Add("browserstack.accessKey", "BROWSERSTACK_ACCESS_KEY");
-            capsJson = JsonConvert.SerializeObject(browserstackOptions);
-            var task = Executetestwithcaps(capsJson);
-            await task;
-        } catch (Exception e) {
-            Console.WriteLine(e);
-        }
+        Dictionary<string, string> catalinaChromeCap = new Dictionary<string, string>();
+        catalinaChromeCap.Add("browser", "chrome");    // allowed browsers are `chrome`, `edge`, `playwright-chromium`, `playwright-firefox` and `playwright-webkit`
+        catalinaChromeCap.Add("browser_version", "latest");
+        catalinaChromeCap.Add("os", "osx");
+        catalinaChromeCap.Add("os_version", "catalina");
+        catalinaChromeCap.Add("name", "Branded Google Chrome on Catalina");
+        catalinaChromeCap.Add("build", "playwright-dotnet-2");
+        catalinaChromeCap.Add("browserstack.username", "BROWSERSTACK_USERNAME");
+        catalinaChromeCap.Add("browserstack.accessKey", "BROWSERSTACK_ACCESS_KEY");
+        capabilitiesList.Add(catalinaChromeCap);
+
+        Dictionary<string, string> catalinaEdgeCap = new Dictionary<string, string>();
+        catalinaEdgeCap.Add("browser", "edge");  // allowed browsers are `chrome`, `edge`, `playwright-chromium`, `playwright-firefox` and `playwright-webkit`
+        catalinaEdgeCap.Add("browser_version", "latest");
+        catalinaEdgeCap.Add("os", "osx");
+        catalinaEdgeCap.Add("os_version", "catalina");
+        catalinaEdgeCap.Add("name", "Branded Microsoft Edge on Catalina");
+        catalinaEdgeCap.Add("build", "playwright-dotnet-2");
+        catalinaEdgeCap.Add("browserstack.username", "BROWSERSTACK_USERNAME");
+        catalinaEdgeCap.Add("browserstack.accessKey", "BROWSERSTACK_ACCESS_KEY");
+        capabilitiesList.Add(catalinaEdgeCap);
+
+        Dictionary<string, string> catalinaFirefoxCap = new Dictionary<string, string>();
+        catalinaFirefoxCap.Add("browser", "playwright-firefox");    // allowed browsers are `chrome`, `edge`, `playwright-chromium`, `playwright-firefox` and `playwright-webkit`
+        catalinaFirefoxCap.Add("os", "osx");
+        catalinaFirefoxCap.Add("os_version", "catalina");
+        catalinaFirefoxCap.Add("name", "Playwright firefox on Catalina");
+        catalinaFirefoxCap.Add("build", "playwright-dotnet-2");
+        catalinaFirefoxCap.Add("browserstack.username", "BROWSERSTACK_USERNAME");
+        catalinaFirefoxCap.Add("browserstack.accessKey", "BROWSERSTACK_ACCESS_KEY");
+        capabilitiesList.Add(catalinaFirefoxCap);
+
+        Dictionary<string, string> catalinaWebkitCap = new Dictionary<string, string>();
+        catalinaWebkitCap.Add("browser", "playwright-webkit"); // allowed browsers are `chrome`, `edge`, `playwright-chromium`, `playwright-firefox` and `playwright-webkit`
+        catalinaWebkitCap.Add("os", "osx");
+        catalinaWebkitCap.Add("os_version", "catalina");
+        catalinaWebkitCap.Add("name", "Playwright webkit on Catalina");
+        catalinaWebkitCap.Add("build", "playwright-dotnet-2");
+        catalinaWebkitCap.Add("browserstack.username", "BROWSERSTACK_USERNAME");
+        catalinaWebkitCap.Add("browserstack.accessKey", "BROWSERSTACK_ACCESS_KEY");
+        capabilitiesList.Add(catalinaWebkitCap);
+
+        Dictionary<string, string> catalinaChromiumCap = new Dictionary<string, string>();
+        catalinaChromiumCap.Add("browser", "playwright-chromium"); // allowed browsers are `chrome`, `edge`, `playwright-chromium`, `playwright-firefox` and `playwright-webkit`
+        catalinaChromiumCap.Add("os", "osx");
+        catalinaChromiumCap.Add("os_version", "catalina");
+        catalinaChromiumCap.Add("name", "Playwright webkit on Catalina");
+        catalinaChromiumCap.Add("build", "playwright-dotnet-2");
+        catalinaChromiumCap.Add("browserstack.username", "BROWSERSTACK_USERNAME");
+        catalinaChromiumCap.Add("browserstack.accessKey", "BROWSERSTACK_ACCESS_KEY");
+        capabilitiesList.Add(catalinaChromiumCap);
+
+        return capabilitiesList;
     }
 
     //Executetestwithcaps function takes capabilities from 'SampleTestCase' function and executes the test
@@ -72,7 +111,6 @@ class PlaywrightParallelTest
             }
         }
         catch (Exception err) {
-            Console.WriteLine(err);
             await MarkTestStatus("failed", err.Message, page);
         }
         await browser.CloseAsync();

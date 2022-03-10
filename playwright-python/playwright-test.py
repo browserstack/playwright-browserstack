@@ -14,7 +14,7 @@ desired_cap = {
   'browserstack.accessKey': 'BROWSERSTACK_ACCESS_KEY'
 }
 
-def run_single_session(playwright):
+def run_session(playwright):
   clientPlaywrightVersion = str(subprocess.getoutput('playwright --version')).strip().split(" ")[1]
   desired_cap['client.playwrightVersion'] = clientPlaywrightVersion
 
@@ -42,4 +42,4 @@ def mark_test_status(status, reason, page):
   page.evaluate("_ => {}", "browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\""+ status + "\", \"reason\": \"" + reason + "\"}}");
 
 with sync_playwright() as playwright:
-  run_single_session(playwright)
+  run_session(playwright)
