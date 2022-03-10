@@ -1,4 +1,5 @@
 import json
+import subprocess
 import urllib
 from threading import Thread
 from playwright.sync_api import sync_playwright
@@ -52,8 +53,11 @@ desired_cap = [
   'browserstack.accessKey': 'BROWSERSTACK_ACCESS_KEY'
 }]
 
-def run_session(desired_cap):
+def run_parallel_session(desired_cap):
   with sync_playwright() as playwright:
+    clientPlaywrightVersion = str(subprocess.getoutput('playwright --version')).strip().split(" ")[1]
+    desired_cap['client.playwrightVersion'] = clientPlaywrightVersion
+
     cdpUrl = 'wss://cdp.browserstack.com/playwright?caps=' + urllib.parse.quote(json.dumps(desired_cap))
     browser = playwright.chromium.connect(cdpUrl)
     page = browser.new_page()
@@ -66,11 +70,25 @@ def run_session(desired_cap):
 
       if title == "Browserstack - Google Search":
         # following line of code is responsible for marking the status of the test on BrowserStack as 'passed'. You can use this code in your after hook after each test
-        page.evaluate("_ => {}", "browserstack_executor: {\"action\":\"setSessionStatus\",\"arguments\":{\"status\":\"passed\",\"reason\":\"Title matched\"}}");
-    except:
-        page.evaluate("_ => {}", "browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"failed\", \"reason\": \" Title did not match\"}}");
-    
+        mark_test_status("passed", "Title matched", page)
+      else:
+        mark_test_status("failed", "Title did not match", page)
+
+    except Exception as error:
+      mark_test_status("failed", error, page)
+
     browser.close()
 
+def mark_test_status(status, reason, page):
+    page.evaluate("_ => {}", "browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\""+ status + "\", \"reason\": \"" + reason + "\"}}");
+
+threads = []
 for cap in desired_cap:
-  Thread(target=run_session, args=(cap,)).start()
+  combination_thread = Thread(target=run_parallel_session, args=(cap,))
+  threads.append(combination_thread)
+  combination_thread.start()
+
+for thread in threads:
+  thread.join()
+
+
