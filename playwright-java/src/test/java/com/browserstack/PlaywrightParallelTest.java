@@ -2,103 +2,106 @@ package com.browserstack;
 
 import com.google.gson.JsonObject;
 import com.microsoft.playwright.*;
-import java.io.UnsupportedEncodingException;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
-class DeviceOne implements Runnable {
+class CombinationOne implements Runnable {
     public void run() {
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("browser", "chrome");    // allowed browsers are `chrome`, `edge`, `playwright-chromium`, `playwright-firefox` and `playwright-webkit`
-        jsonObject.addProperty("browser_version", "latest");
-        jsonObject.addProperty("os", "osx");
-        jsonObject.addProperty("os_version", "catalina");
-        jsonObject.addProperty("name", "Branded Google Chrome on Catalina");
-        jsonObject.addProperty("build", "playwright-build-2");
+        JsonObject capabilitiesObject = new JsonObject();
+        capabilitiesObject.addProperty("browser", "chrome");    // allowed browsers are `chrome`, `edge`, `playwright-chromium`, `playwright-firefox` and `playwright-webkit`
+        capabilitiesObject.addProperty("browser_version", "latest");
+        capabilitiesObject.addProperty("os", "osx");
+        capabilitiesObject.addProperty("os_version", "catalina");
+        capabilitiesObject.addProperty("name", "Branded Google Chrome on Catalina");
+        capabilitiesObject.addProperty("build", "playwright-build-2");
 
         PlaywrightParallelTest deviceOne = new PlaywrightParallelTest();
-        deviceOne.executeTest(jsonObject);
+        deviceOne.executeTest(capabilitiesObject);
     }
 }
 
-class DeviceTwo implements Runnable {
+class CombinationTwo implements Runnable {
     public void run() {
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("browser", "edge");  // allowed browsers are `chrome`, `edge`, `playwright-chromium`, `playwright-firefox` and `playwright-webkit`
-        jsonObject.addProperty("browser_version", "latest");
-        jsonObject.addProperty("os", "osx");
-        jsonObject.addProperty("os_version", "catalina");
-        jsonObject.addProperty("name", "Branded Microsoft Edge on Catalina");
-        jsonObject.addProperty("build", "playwright-build-2");
+        JsonObject capabilitiesObject = new JsonObject();
+        capabilitiesObject.addProperty("browser", "edge");  // allowed browsers are `chrome`, `edge`, `playwright-chromium`, `playwright-firefox` and `playwright-webkit`
+        capabilitiesObject.addProperty("browser_version", "latest");
+        capabilitiesObject.addProperty("os", "osx");
+        capabilitiesObject.addProperty("os_version", "catalina");
+        capabilitiesObject.addProperty("name", "Branded Microsoft Edge on Catalina");
+        capabilitiesObject.addProperty("build", "playwright-build-2");
         PlaywrightParallelTest deviceTwo = new PlaywrightParallelTest();
-        deviceTwo.executeTest(jsonObject);
+        deviceTwo.executeTest(capabilitiesObject);
     }
 }
 
-class DeviceThree implements Runnable {
+class CombinationThree implements Runnable {
     public void run() {
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("browser", "playwright-firefox");    // allowed browsers are `chrome`, `edge`, `playwright-chromium`, `playwright-firefox` and `playwright-webkit`
-        jsonObject.addProperty("os", "osx");
-        jsonObject.addProperty("os_version", "catalina");
-        jsonObject.addProperty("name", "Playwright firefox on Catalina");
-        jsonObject.addProperty("build", "playwright-build-2");
+        JsonObject capabilitiesObject = new JsonObject();
+        capabilitiesObject.addProperty("browser", "playwright-firefox");    // allowed browsers are `chrome`, `edge`, `playwright-chromium`, `playwright-firefox` and `playwright-webkit`
+        capabilitiesObject.addProperty("os", "osx");
+        capabilitiesObject.addProperty("os_version", "catalina");
+        capabilitiesObject.addProperty("name", "Playwright firefox on Catalina");
+        capabilitiesObject.addProperty("build", "playwright-build-2");
         PlaywrightParallelTest deviceThree = new PlaywrightParallelTest();
-        deviceThree.executeTest(jsonObject);
+        deviceThree.executeTest(capabilitiesObject);
     }
 }
 
-class DeviceFour implements Runnable {
+class CombinationFour implements Runnable {
     public void run() {
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("browser", "playwright-webkit"); // allowed browsers are `chrome`, `edge`, `playwright-chromium`, `playwright-firefox` and `playwright-webkit`
-        jsonObject.addProperty("os", "osx");
-        jsonObject.addProperty("os_version", "catalina");
-        jsonObject.addProperty("name", "Playwright webkit on Catalina");
-        jsonObject.addProperty("build", "playwright-build-2");
+        JsonObject capabilitiesObject = new JsonObject();
+        capabilitiesObject.addProperty("browser", "playwright-webkit"); // allowed browsers are `chrome`, `edge`, `playwright-chromium`, `playwright-firefox` and `playwright-webkit`
+        capabilitiesObject.addProperty("os", "osx");
+        capabilitiesObject.addProperty("os_version", "catalina");
+        capabilitiesObject.addProperty("name", "Playwright webkit on Catalina");
+        capabilitiesObject.addProperty("build", "playwright-build-2");
         PlaywrightParallelTest deviceFour = new PlaywrightParallelTest();
-        deviceFour.executeTest(jsonObject);
+        deviceFour.executeTest(capabilitiesObject);
     }
 }
 
-class DeviceFive implements Runnable {
+class CombinationFive implements Runnable {
     public void run() {
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("browser", "playwright-chromium");   // allowed browsers are `chrome`, `edge`, `playwright-chromium`, `playwright-firefox` and `playwright-webkit`
-        jsonObject.addProperty("os", "osx");
-        jsonObject.addProperty("os_version", "catalina");
-        jsonObject.addProperty("name", "Chrome on Win10");
-        jsonObject.addProperty("build", "playwright-build-2");
+        JsonObject capabilitiesObject = new JsonObject();
+        capabilitiesObject.addProperty("browser", "playwright-chromium");   // allowed browsers are `chrome`, `edge`, `playwright-chromium`, `playwright-firefox` and `playwright-webkit`
+        capabilitiesObject.addProperty("os", "osx");
+        capabilitiesObject.addProperty("os_version", "catalina");
+        capabilitiesObject.addProperty("name", "Chrome on Win10");
+        capabilitiesObject.addProperty("build", "playwright-build-2");
         PlaywrightParallelTest deviceFive = new PlaywrightParallelTest();
-        deviceFive.executeTest(jsonObject);
+        deviceFive.executeTest(capabilitiesObject);
     }
 }
 
 public class PlaywrightParallelTest {
 
     public static void main(String[] args) throws Exception {
-        Thread threadOne = new Thread(new DeviceOne());
-        threadOne.start();
-        Thread threadTwo = new Thread(new DeviceTwo());
-        threadTwo.start();
-        Thread threadThree = new Thread(new DeviceThree());
-        threadThree.start();
-        Thread threadFour = new Thread(new DeviceFour());
-        threadFour.start();
-        Thread threadFive = new Thread(new DeviceFive());
-        threadFive.start();
+        Object[] combinationObjects = { new CombinationOne(), new CombinationTwo(), new CombinationThree(), new CombinationFour(), new CombinationFive() };
+        ArrayList<Thread> threadList = new ArrayList<Thread>();
+
+        for (Object combination: combinationObjects) {
+            Thread combinationThread = new Thread((Runnable) combination);
+            threadList.add(combinationThread);
+            combinationThread.start();
+        }
+
+        for (Thread thread: threadList) {
+            thread.join();
+        }
     }
 
-    public void executeTest( JsonObject jsonObject ) {
-        jsonObject.addProperty("browserstack.username", "BROWSERSTACK_USERNAME");
-        jsonObject.addProperty("browserstack.accessKey", "BROWSERSTACK_ACCESS_KEY");
+    public void executeTest( JsonObject capabilitiesObject ) {
+        capabilitiesObject.addProperty("browserstack.username", "BROWSERSTACK_USERNAME");
+        capabilitiesObject.addProperty("browserstack.accessKey", "BROWSERSTACK_ACCESS_KEY");
 
+        Page page = null;
         try (Playwright playwright = Playwright.create()) {
             BrowserType chromium = playwright.chromium();
-            String caps = URLEncoder.encode(jsonObject.toString(), "utf-8");
+            String caps = URLEncoder.encode(capabilitiesObject.toString(), "utf-8");
             String ws_endpoint = "wss://cdp.browserstack.com/playwright?caps=" + caps;
             Browser browser = chromium.connect(ws_endpoint);
-            Page page = browser.newPage();
+            page = browser.newPage();
             page.navigate("https://www.google.co.in/");
             Locator locator = page.locator("[aria-label='Search']");
             locator.click();
@@ -106,18 +109,22 @@ public class PlaywrightParallelTest {
             page.locator("[aria-label='Google Search'] >> nth=0").click();
             String title = page.title();
 
-            Object result;
             if (title.equals("BrowserStack - Google Search")) {
                 // following line of code is responsible for marking the status of the test on BrowserStack as 'passed'. You can use this code in your after hook after each test
-                result = page.evaluate("_ => {}", "browserstack_executor: { \"action\": \"setSessionStatus\", \"arguments\": { \"status\": \"passed\", \"reason\": \"Title matched\"}}");
-                System.out.println(result);
+                markTestStatus("passed", "Title matched", page);
             } else {
-                result = page.evaluate("_ => {}", "browserstack_executor: { \"action\": \"setSessionStatus\", \"arguments\": { \"status\": \"failed\", \"reason\": \"Title did not matched\"}}");
-                System.out.println(result);
+                markTestStatus("failed", "Title did not match", page);
             }
             browser.close();
-        } catch (UnsupportedEncodingException e) {
-            System.out.println(e);
+        } catch (Exception err) {
+            assert page != null;
+            markTestStatus("failed", err.getMessage(), page);
         }
+    }
+
+    public static void markTestStatus(String status, String reason, Page page) {
+        Object result;
+        result = page.evaluate("_ => {}", "browserstack_executor: { \"action\": \"setSessionStatus\", \"arguments\": { \"status\": \"" + status + "\", \"reason\": \"" + reason + "\"}}");
+        System.out.println(result);
     }
 }

@@ -33,12 +33,19 @@ class PlaywrightSingleTest
           if (title == "BrowserStack - Google Search")
           {
             // following line of code is responsible for marking the status of the test on BrowserStack as 'passed'. You can use this code in your after hook after each test
-            await page.EvaluateAsync("_ => {}", "browserstack_executor: {\"action\":\"setSessionStatus\",\"arguments\":{\"status\":\"passed\",\"reason\":\"Title matched\"}}");
+            await MarkTestStatus("passed", "Title matched", page);
+          }
+          else {
+            await MarkTestStatus("failed", "Title did not match", page);
           }
         }
-        catch {
-          await page.EvaluateAsync("_ => {}", "browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"failed\", \"reason\": \" Title did not match\"}}");
+        catch (Exception err) {
+          await MarkTestStatus("failed", err.Message, page);
         }
         await browser.CloseAsync();
+    }
+
+    public static async Task MarkTestStatus(string status, string reason, IPage page) {
+        await page.EvaluateAsync("_ => {}", "browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"" + status + "\", \"reason\": \"" + reason + "\"}}");
     }
 }

@@ -13,14 +13,14 @@ class PlaywrightParallelTest
         try {
             // allowed browsers are `chrome`, `edge`, `playwright-chromium`, `playwright-firefox` and `playwright-webkit`
             // browser_version capability is valid only for branded `chrome` and `edge` browsers and you can specify any browser version like `latest`, `latest-beta`, `latest-1` and so on.
-            var device1 = SampleTestCase("playwright-chromium", "latest", "osx", "Catalina", "macOS Catalina - Chrome latest", "Parallel-build-2"); 
-            var device2 = SampleTestCase("chrome", "latest", "osx", "catalina", "Branded Google Chrome on Catalina", "Parallel-build-2");
-            var device3 = SampleTestCase("edge", "latest", "osx", "catalina", "Branded Microsoft Edge on Catalina", "Parallel-build-2");
-            var device4 = SampleTestCase("playwright-firefox", "latest", "osx", "catalina", "Playwright firefox on Catalina", "Parallel-build-2");
-            var device5 = SampleTestCase("playwright-webkit", "latest", "osx", "catalina", "Playwright webkit on Catalina", "Parallel-build-2");
+            var combination1 = SampleTestCase("playwright-chromium", "latest", "osx", "Catalina", "macOS Catalina - Chrome latest", "Parallel-build-2"); 
+            var combination2 = SampleTestCase("chrome", "latest", "osx", "catalina", "Branded Google Chrome on Catalina", "Parallel-build-2");
+            var combination3 = SampleTestCase("edge", "latest", "osx", "catalina", "Branded Microsoft Edge on Catalina", "Parallel-build-2");
+            var combination4 = SampleTestCase("playwright-firefox", "latest", "osx", "catalina", "Playwright firefox on Catalina", "Parallel-build-2");
+            var combination5 = SampleTestCase("playwright-webkit", "latest", "osx", "catalina", "Playwright webkit on Catalina", "Parallel-build-2");
             
             //Executing the methods
-            await Task.WhenAll(device1, device2, device3, device4, device5);
+            await Task.WhenAll(combination1, combination2, combination3, combination4, combination5);
         } catch (Exception e) {
             Console.WriteLine(e);
         }
@@ -31,62 +31,17 @@ class PlaywrightParallelTest
         string capsJson;
 
         try {
-
-            switch (browser_name)
-            {
-                case "playwright-chromium":
-                    browserstackOptions.Add("build", build_name);
-                    browserstackOptions.Add("name", test_name);
-                    browserstackOptions.Add("os", os);
-                    browserstackOptions.Add("os_version", os_version);
-                    browserstackOptions.Add("browser", browser_name);
-                    browserstackOptions.Add("browser_version", browser_version);
-                    browserstackOptions.Add("browserstack.username", "BROWSERSTACK_USERNAME");
-                    browserstackOptions.Add("browserstack.accessKey", "BROWSERSTACK_ACCESS_KEY");
-                    capsJson = JsonConvert.SerializeObject(browserstackOptions);
-                    var task = Executetestwithcaps(capsJson);
-                    await task;
-                    break;
-                case "chrome":
-                    browserstackOptions.Add("build", build_name);
-                    browserstackOptions.Add("name", test_name);
-                    browserstackOptions.Add("os", os);
-                    browserstackOptions.Add("os_version", os_version);
-                    browserstackOptions.Add("browser", browser_name);
-                    browserstackOptions.Add("browser_version", browser_version);
-                    browserstackOptions.Add("browserstack.username", "BROWSERSTACK_USERNAME");
-                    browserstackOptions.Add("browserstack.accessKey", "BROWSERSTACK_ACCESS_KEY");
-                    capsJson = JsonConvert.SerializeObject(browserstackOptions);
-                    task = Executetestwithcaps(capsJson);
-                    await task;
-                    break;
-                case "playwright-firefox":
-                    browserstackOptions.Add("build", build_name);
-                    browserstackOptions.Add("name", test_name);
-                    browserstackOptions.Add("os", os);
-                    browserstackOptions.Add("os_version", os_version);
-                    browserstackOptions.Add("browser", browser_name);
-                    browserstackOptions.Add("browser_version", browser_version);
-                    browserstackOptions.Add("browserstack.username", "BROWSERSTACK_USERNAME");
-                    browserstackOptions.Add("browserstack.accessKey", "BROWSERSTACK_ACCESS_KEY");
-                    capsJson = JsonConvert.SerializeObject(browserstackOptions);
-                    task = Executetestwithcaps(capsJson);
-                    await task;
-                    break;
-                default:
-                    browserstackOptions.Add("build", build_name);
-                    browserstackOptions.Add("name", test_name);
-                    browserstackOptions.Add("os", os);
-                    browserstackOptions.Add("os_version", os_version);
-                    browserstackOptions.Add("browser", browser_name);
-                    browserstackOptions.Add("browser_version", browser_version);
-                    browserstackOptions.Add("browserstack.username", "BROWSERSTACK_USERNAME");
-                    browserstackOptions.Add("browserstack.accessKey", "BROWSERSTACK_ACCESS_KEY");
-                    capsJson = JsonConvert.SerializeObject(browserstackOptions);
-                    task = Executetestwithcaps(capsJson);
-                    await task;
-                    break;
-            }
+            browserstackOptions.Add("build", build_name);
+            browserstackOptions.Add("name", test_name);
+            browserstackOptions.Add("os", os);
+            browserstackOptions.Add("os_version", os_version);
+            browserstackOptions.Add("browser", browser_name);
+            browserstackOptions.Add("browser_version", browser_version);
+            browserstackOptions.Add("browserstack.username", "BROWSERSTACK_USERNAME");
+            browserstackOptions.Add("browserstack.accessKey", "BROWSERSTACK_ACCESS_KEY");
+            capsJson = JsonConvert.SerializeObject(browserstackOptions);
+            var task = Executetestwithcaps(capsJson);
+            await task;
         } catch (Exception e) {
             Console.WriteLine(e);
         }
@@ -110,13 +65,19 @@ class PlaywrightParallelTest
             if (title == "BrowserStack - Google Search")
             {
                 // following line of code is responsible for marking the status of the test on BrowserStack as 'passed'. You can use this code in your after hook after each test
-                await page.EvaluateAsync("_ => {}", "browserstack_executor: {\"action\":\"setSessionStatus\",\"arguments\":{\"status\":\"passed\",\"reason\":\"Title matched\"}}");
+                await MarkTestStatus("passed", "Title matched", page);
+            } else
+            {
+                await MarkTestStatus("failed", "Title did not match", page);
             }
         }
-        catch (Exception e) {
-            Console.WriteLine(e);
-            await page.EvaluateAsync("_ => {}", "browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"failed\", \"reason\": \" Title did not match\"}}");
+        catch (Exception err) {
+            Console.WriteLine(err);
+            await MarkTestStatus("failed", err.Message, page);
         }
         await browser.CloseAsync();
+    }
+    public static async Task MarkTestStatus(string status, string reason, IPage page) {
+        await page.EvaluateAsync("_ => {}", "browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"" + status + "\", \"reason\": \"" + reason + "\"}}");
     }
 }
