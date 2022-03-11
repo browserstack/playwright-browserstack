@@ -74,8 +74,8 @@ def run_parallel_session(desired_cap):
       else:
         mark_test_status("failed", "Title did not match", page)
 
-    except Exception as error:
-      mark_test_status("failed", error, page)
+    except Exception as err:
+      mark_test_status("failed", str(err), page)
 
     browser.close()
 
