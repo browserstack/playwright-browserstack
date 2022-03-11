@@ -19,6 +19,12 @@
 
   ### Run sample test on privately hosted websites
 
+  **Using Language Bindings**
+    1. Run 
+    `mvn -Dexec.mainClass="com.browserstack.PlaywrightLocalUsingBindingsTest" -Dexec.classpathScope=test test-compile exec:java`
+
+  **Using Command-line Interface**
+
   1. You have to download the BrowserStack Local binary from the links below (depending on your environment):
       * [OS X (10.7 and above)](https://www.browserstack.com/browserstack-local/BrowserStackLocal-darwin-x64.zip)
       * [Linux 32-bit](https://www.browserstack.com/browserstack-local/BrowserStackLocal-linux-ia32.zip)

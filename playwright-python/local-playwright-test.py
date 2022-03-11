@@ -36,7 +36,7 @@ def run_local_session():
       mark_test_status("failed", "Title did not match", page)
 
   except Exception as err:
-    mark_test_status("failed", err, page)
+    mark_test_status("failed", str(err), page)
   
   browser.close()
 

@@ -21,6 +21,14 @@
 - To run parallel tests, run `python parallel-playwright-test.py`
 
   ### Run sample test on privately hosted websites
+  **Using Language Bindings**
+    1. Follow the steps below:
+       ```
+       pip install browserstack-local
+       python local-using-bindings-playwright-test.py
+       ```
+
+    **Using Command-line Interface**
 
   1. You have to download the BrowserStack Local binary from the links below (depending on your environment):
       * [OS X (10.7 and above)](https://www.browserstack.com/browserstack-local/BrowserStackLocal-darwin-x64.zip)

@@ -34,7 +34,7 @@ def run_session(playwright):
     else:
       mark_test_status("failed", "Title did not match", page)
   except Exception as err:
-      mark_test_status("failed", err, page)
+      mark_test_status("failed", str(err), page)
 
   browser.close()
 
