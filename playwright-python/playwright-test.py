@@ -9,7 +9,7 @@ desired_cap = {
   'os': 'osx',
   'os_version': 'catalina',
   'name': 'Branded Google Chrome on Catalina',
-  'build': 'playwright-build-1',
+  'build': 'playwright-python-1',
   'browserstack.username': 'BROWSERSTACK_USERNAME',
   'browserstack.accessKey': 'BROWSERSTACK_ACCESS_KEY'
 }

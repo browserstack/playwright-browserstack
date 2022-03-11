@@ -21,6 +21,14 @@ namespace PlaywrightTesting
                     Console.WriteLine("Running Local Test");
                     await PlaywrightLocalTest.main(args);
                     break;
+                case "iphonetest":
+                    Console.WriteLine("Running iPhone Test");
+                    await PlaywrightIPhoneTest.main(args);
+                    break;
+                case "pixeltest":
+                    Console.WriteLine("Running Pixel Test");
+                    await PlaywrightPixelTest.main(args);
+                    break;
                 default:
                     Console.WriteLine("Running Single Test by default");
                     await PlaywrightTest.main(args);
