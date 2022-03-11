@@ -11,7 +11,7 @@ desired_cap = [
   'os': 'osx',
   'os_version': 'catalina',
   'name': 'Branded Google Chrome on Catalina',
-  'build': 'playwright-build-2',
+  'build': 'playwright-python-2',
   'browserstack.username': 'BROWSERSTACK_USERNAME',
   'browserstack.accessKey': 'BROWSERSTACK_ACCESS_KEY'
 },
@@ -21,7 +21,7 @@ desired_cap = [
   'os': 'osx',
   'os_version': 'catalina',
   'name': 'Branded Microsoft Edge on Catalina',
-  'build': 'playwright-build-2',
+  'build': 'playwright-python-2',
   'browserstack.username': 'BROWSERSTACK_USERNAME',
   'browserstack.accessKey': 'BROWSERSTACK_ACCESS_KEY'
 },
@@ -30,7 +30,7 @@ desired_cap = [
   'os': 'osx',
   'os_version': 'catalina',
   'name': 'Playwright firefox on Catalina',
-  'build': 'playwright-build-2',
+  'build': 'playwright-python-2',
   'browserstack.username': 'BROWSERSTACK_USERNAME',
   'browserstack.accessKey': 'BROWSERSTACK_ACCESS_KEY'
 },
@@ -39,7 +39,7 @@ desired_cap = [
   'os': 'osx',
   'os_version': 'catalina',
   'name': 'Playwright webkit on Catalina',
-  'build': 'playwright-build-2',
+  'build': 'playwright-python-2',
   'browserstack.username': 'BROWSERSTACK_USERNAME',
   'browserstack.accessKey': 'BROWSERSTACK_ACCESS_KEY'
 },
@@ -48,7 +48,7 @@ desired_cap = [
   'os': 'osx',
   'os_version': 'Catalina',
   'name': 'Chrome on Win10',
-  'build': 'playwright-build-2',
+  'build': 'playwright-python-2',
   'browserstack.username': 'BROWSERSTACK_USERNAME',
   'browserstack.accessKey': 'BROWSERSTACK_ACCESS_KEY'
 }]
