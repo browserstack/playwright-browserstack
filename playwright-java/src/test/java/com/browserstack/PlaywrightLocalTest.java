@@ -49,6 +49,5 @@ public class PlaywrightLocalTest {
     public static void markTestStatus(String status, String reason, Page page) {
         Object result;
         result = page.evaluate("_ => {}", "browserstack_executor: { \"action\": \"setSessionStatus\", \"arguments\": { \"status\": \"" + status + "\", \"reason\": \"" + reason + "\"}}");
-        System.out.println(result);
     }
 }

@@ -32,7 +32,7 @@ public class PlaywrightLocalUsingBindingsTest {
             bsLocal.start(bsLocalArgs);
 
             // Check if BrowserStack local instance is running
-            System.out.println(bsLocal.isRunning());
+            System.out.println("BrowserStackLocal running: " + bsLocal.isRunning());
 
             BrowserType chromium = playwright.chromium();
             String caps = URLEncoder.encode(capabilitiesObject.toString(), "utf-8");
@@ -68,6 +68,5 @@ public class PlaywrightLocalUsingBindingsTest {
     public static void markTestStatus(String status, String reason, Page page) {
         Object result;
         result = page.evaluate("_ => {}", "browserstack_executor: { \"action\": \"setSessionStatus\", \"arguments\": { \"status\": \"" + status + "\", \"reason\": \"" + reason + "\"}}");
-        System.out.println(result);
     }
 }
