@@ -27,7 +27,7 @@ def run_local_session(playwright):
     bs_local.start(**bs_local_args)
 
     # Check if BrowserStack local instance is running
-    print(bs_local.isRunning())
+    print("BrowserStackLocal running: " + bs_local.isRunning())
 
     clientPlaywrightVersion = str(subprocess.getoutput('playwright --version')).strip().split(" ")[1]
     desired_cap['client.playwrightVersion'] = clientPlaywrightVersion
