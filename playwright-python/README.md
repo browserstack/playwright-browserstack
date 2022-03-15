@@ -21,7 +21,7 @@
 - To run parallel tests, run `python parallel-playwright-test.py`
 - To run sessions on emulated devices, 
 `python playwright-test-on-iphone.py` or `python playwright-test-on-pixel.py`
-You can specify any device name from thebelow list: 
+You can specify any device name from the below list: 
 https://github.com/microsoft/playwright/blob/main/packages/playwright-core/src/server/deviceDescriptorsSource.json
 - Run `python session-details-playwright-test.py` to check how to get session details.
 
