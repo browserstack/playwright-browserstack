@@ -29,7 +29,7 @@ class PlaywrightPixelTest
           await page.Locator("[aria-label='Search']").ClickAsync();
           await page.FillAsync("[aria-label='Search']", "BrowserStack");
           await page.Keyboard.PressAsync("Enter");
-          await page.WaitForTimeoutAsync(1000);
+          await page.Locator("[aria-current='page']").WaitForAsync();
           var title = await page.TitleAsync();
 
           if (title == "BrowserStack - Google Search")

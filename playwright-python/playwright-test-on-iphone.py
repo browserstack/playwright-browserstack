@@ -25,7 +25,7 @@ def run_session(playwright):
     page.goto("https://www.google.co.in/")
     page.fill("[aria-label='Search']", 'Browserstack')
     page.keyboard.press('Enter')
-    page.wait_for_timeout(1000)
+    page.locator("[aria-current='page']").wait_for();
     title = page.title()
 
     if title == "Browserstack - Google Search":
