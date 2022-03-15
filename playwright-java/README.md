@@ -24,7 +24,7 @@
   ```
   mvn -Dexec.mainClass="com.browserstack.PlaywrightPixelTest" -Dexec.classpathScope=test test-compile exec:java
   ```
-You can specify contextOptions() from thr below list: 
+You can specify contextOptions() from thebelow list: 
 https://github.com/microsoft/playwright/blob/main/packages/playwright-core/src/server/deviceDescriptorsSource.json
 - Run `mvn -Dexec.mainClass="com.browserstack.PlaywrightSessionDetailsTest" -Dexec.classpathScope=test test-compile exec:java` to check how to get session details.
 
