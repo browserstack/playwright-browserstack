@@ -29,6 +29,10 @@ namespace PlaywrightTesting
                     Console.WriteLine("Running Pixel Test");
                     await PlaywrightPixelTest.main(args);
                     break;
+                case "sessiondetails":
+                    Console.WriteLine("Getting Session Details Test");
+                    await PlaywrightSessionDetailsTest.main(args);
+                    break;
                 default:
                     Console.WriteLine("Running Single Test by default");
                     await PlaywrightTest.main(args);

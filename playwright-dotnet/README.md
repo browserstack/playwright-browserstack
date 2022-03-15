@@ -13,6 +13,11 @@
 
 - To run a single test, run `dotnet run single`
 - To run a parallel test, run command `dotnet run parallel`
+- To run sessions on emulated devices, 
+`dotnet run iphonetest` or `dotnet run pixeltest`
+You can specify any device name from thr below list: 
+https://github.com/microsoft/playwright/blob/main/packages/playwright-core/src/server/deviceDescriptorsSource.json
+- Run `dotnet run sessiondetails` to check how to get session details.
 
   ### Run sample test on privately hosted websites
 
