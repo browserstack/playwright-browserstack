@@ -16,6 +16,7 @@
 - To run parallel tests, run 
   `mvn -Dexec.mainClass="com.browserstack.PlaywrightParallelTest" -Dexec.classpathScope=test test-compile exec:java
 `
+- Run `mvn -Dexec.mainClass="com.browserstack.PlaywrightSessionDetailsTest" -Dexec.classpathScope=test test-compile exec:java` to check how to get session details.
 
   ### Run sample test on privately hosted websites
 
