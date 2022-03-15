@@ -16,6 +16,16 @@
 - To run parallel tests, run 
   `mvn -Dexec.mainClass="com.browserstack.PlaywrightParallelTest" -Dexec.classpathScope=test test-compile exec:java
 `
+- To run sessions on emulated devices, 
+  ```
+  mvn -Dexec.mainClass="com.browserstack.PlaywrightIPhoneTest" -Dexec.classpathScope=test test-compile exec:java
+  ``` 
+  or 
+  ```
+  mvn -Dexec.mainClass="com.browserstack.PlaywrightPixelTest" -Dexec.classpathScope=test test-compile exec:java
+  ```
+You can specify contextOptions() from thr below list: 
+https://github.com/microsoft/playwright/blob/main/packages/playwright-core/src/server/deviceDescriptorsSource.json
 - Run `mvn -Dexec.mainClass="com.browserstack.PlaywrightSessionDetailsTest" -Dexec.classpathScope=test test-compile exec:java` to check how to get session details.
 
   ### Run sample test on privately hosted websites
