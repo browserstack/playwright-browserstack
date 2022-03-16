@@ -32,12 +32,11 @@ def run_session(playwright):
     
     # get details of the session
     response = page.evaluate("_=> {}", 'browserstack_executor: {"action": "getSessionDetails"}')
-    print(response)
     
-    jsonResponse = json.loads(response)
+    session_details= json.loads(response)
 
-    # print the session ID in the IDE's console
-    print(jsonResponse["hashed_id"])
+    # print the session Details in the IDE's console
+    print("GetSessionDetails response: \n", session_details)
 
   except Exception as err:
       mark_test_status("failed", str(err), page)

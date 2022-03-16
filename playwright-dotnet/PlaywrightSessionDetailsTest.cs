@@ -41,7 +41,6 @@ class PlaywrightSessionDetailsTest
             await MarkTestStatus("failed", "Title did not match", page);
           }
           Object sessionObject = await page.EvaluateAsync("_ => {}", "browserstack_executor: {\"action\":\"getSessionDetails\"}");
-          Console.WriteLine(sessionObject);
 
           // convert Object to String for parsing
           string? json_resp = Convert.ToString(sessionObject);
@@ -51,8 +50,8 @@ class PlaywrightSessionDetailsTest
           {
             var session_details = JObject.Parse(json_resp);
             
-            // print the session ID on IDE's console
-            Console.WriteLine(session_details["hashed_id"]);
+            // print the session Details on IDE's console
+            Console.WriteLine("GetSessionDetails response: \n" + session_details);
           }
         }
         catch (Exception err) {
