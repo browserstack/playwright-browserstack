@@ -41,16 +41,12 @@ public class PlaywrightSessionDetailsTest {
 
                 // store the JSON response in the Object class
                 Object response = page.evaluate("_ => {}", "browserstack_executor: {\"action\": \"getSessionDetails\"}");
-                System.out.println(response);
 
                 // parse the JSON response
-                JsonObject json = JsonParser.parseString((String) response).getAsJsonObject();
+                JsonObject sessionDetails = JsonParser.parseString((String) response).getAsJsonObject();
 
-                // store session ID in a variable
-                String sessionID = String.valueOf(json.get("hashed_id"));
-
-                // print session ID in your IDE's console
-                System.out.println(sessionID);
+                // print session Details in your IDE's console
+                System.out.println("GetSessionDetails response: \n" + sessionDetails);
             } catch (Exception err) {
                 markTestStatus("failed", err.getMessage(), page);
             }
