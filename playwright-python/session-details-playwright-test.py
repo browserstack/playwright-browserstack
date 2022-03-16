@@ -29,18 +29,19 @@ def run_session(playwright):
       mark_test_status("passed", "Title matched", page)
     else:
       mark_test_status("failed", "Title did not match", page)
+    
+    # get details of the session
+    response = page.evaluate("_=> {}", 'browserstack_executor: {"action": "getSessionDetails"}')
+    print(response)
+    
+    jsonResponse = json.loads(response)
+
+    # print the session ID in the IDE's console
+    print(jsonResponse["hashed_id"])
+
   except Exception as err:
       mark_test_status("failed", str(err), page)
   
-  # get details of the session
-  response = page.evaluate("_=> {}", 'browserstack_executor: {"action": "getSessionDetails"}')
-  print(response)
-  
-  jsonResponse = json.loads(response)
-
-  # print the session ID in the IDE's console
-  print(jsonResponse["hashed_id"])
-
   browser.close()
 
 def mark_test_status(status, reason, page):
