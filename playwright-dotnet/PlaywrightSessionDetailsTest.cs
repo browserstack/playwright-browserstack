@@ -48,10 +48,10 @@ class PlaywrightSessionDetailsTest
           // parse the data
           if (json_resp != null)
           {
-            var session_details = JObject.Parse(json_resp);
+            var sessionDetails = JObject.Parse(json_resp);
             
             // print the session Details on IDE's console
-            Console.WriteLine("GetSessionDetails response: \n" + session_details);
+            Console.WriteLine("GetSessionDetails response: \n" + sessionDetails);
           }
         }
         catch (Exception err) {
