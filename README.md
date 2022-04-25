@@ -17,7 +17,7 @@ You need BrowserStack credentials to be able to run Playwright tests. You have t
 
 1. Clone this repository
 2. Install the dependencies using `npm install`
-3. Run the sample script using `node google_search.js`
+3. Run the sample script using `node single_test.js`
 
 **Important Note**: When you try to run your Playwright tests on BrowserStack, you need to pass your locally installed client Playwright version in the capability `client.playwrightVersion`. This is required because it is often possible that your locally installed version might be different than the server version running on BrowserStack and the mismatch could lead to different request/response formats leading to socket errors.
 
