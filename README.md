@@ -19,6 +19,12 @@ You need BrowserStack credentials to be able to run Playwright tests. You have t
 2. Install the dependencies using `npm install`
 3. Run the sample script using `node single_test.js`
 
+**Note**: When using Node for your Playwright test, you need to stay in the home directory. If you prefer using other frameworks, navigate to the specific frameworks folder using the following Commands:
+* Playwright Test Runner: cd playwright-test
+* Java: cd playwright-java
+* Python: playwright-python
+* C#: playwright-csharp
+
 **Important Note**: When you try to run your Playwright tests on BrowserStack, you need to pass your locally installed client Playwright version in the capability `client.playwrightVersion`. This is required because it is often possible that your locally installed version might be different than the server version running on BrowserStack and the mismatch could lead to different request/response formats leading to socket errors.
 
 Playwright does not pass the client version information in the `connect` request yet and hence this capability is required to let BrowserStack know about your locally installed version, to avoid any error scenarios arising from this. **This has already been taken care in the sample scripts under this repository**.
