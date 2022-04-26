@@ -6,7 +6,7 @@
 
 ## Setup
 
-* Clone the repo and run `cd Playwright-dotnet`
+* Clone the repo and run `cd playwright-csharp`
 * Run `dotnet build`
 
 ## Running your tests
