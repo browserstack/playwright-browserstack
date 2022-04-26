@@ -20,7 +20,7 @@ You need BrowserStack credentials to be able to run Playwright tests. You have t
 3. Run the sample script using `node single_test.js`
 
 **Note**: When using Node for your Playwright test, you need to stay in the home directory. If you prefer using other frameworks, navigate to the specific frameworks folder using the following Commands:
-* Playwright Test Runner: cd playwright-test
+* Playwright Test Runner: `cd playwright-test`
 * Java: cd playwright-java
 * Python: playwright-python
 * C#: playwright-csharp
