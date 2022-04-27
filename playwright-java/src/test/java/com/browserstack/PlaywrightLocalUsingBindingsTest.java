@@ -46,6 +46,7 @@ public class PlaywrightLocalUsingBindingsTest {
                         ".innerText" +
                         ".includes(\"This is an internal server for BrowserStack Local\")");
 
+                // following line of code is responsible for marking the status of the test on BrowserStack as 'passed'. You can use this code in your after hook after each test
                 markTestStatus("passed", "Local is up and running", page);
             } catch (Exception err) {
                 markTestStatus("failed", "BrowserStack Local binary is not running", page);
