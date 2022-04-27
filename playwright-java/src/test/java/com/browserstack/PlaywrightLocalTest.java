@@ -24,14 +24,10 @@ public class PlaywrightLocalTest {
             Browser browser = chromium.connect(ws_endpoint);
             Page page = browser.newPage();
             try {
-                page.navigate("https://www.google.co.in/");
-                Locator locator = page.locator("[aria-label='Search']");
-                locator.click();
-                page.fill("[aria-label='Search']", "BrowserStack");
-                page.locator("[aria-label='Google Search'] >> nth=0").click();
+                page.navigate("http://localhost:45454");
                 String title = page.title();
 
-                if (title.equals("BrowserStack - Google Search")) {
+                if (title.equals("BrowserStack Local")) {
                     // following line of code is responsible for marking the status of the test on BrowserStack as 'passed'. You can use this code in your after hook after each test
                     markTestStatus("passed", "Title matched", page);
                 } else {

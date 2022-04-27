@@ -40,21 +40,15 @@ public class PlaywrightLocalUsingBindingsTest {
             Browser browser = chromium.connect(ws_endpoint);
             Page page = browser.newPage();
             try {
-                page.navigate("https://www.google.co.in/");
-                Locator locator = page.locator("[aria-label='Search']");
-                locator.click();
-                page.fill("[aria-label='Search']", "BrowserStack");
-                page.locator("[aria-label='Google Search'] >> nth=0").click();
-                String title = page.title();
-    
-                if (title.equals("BrowserStack - Google Search")) {
-                    // following line of code is responsible for marking the status of the test on BrowserStack as 'passed'. You can use this code in your after hook after each test
-                    markTestStatus("passed", "Title matched", page);
-                } else {
-                    markTestStatus("failed", "Title did not match", page);
-                }              
+                page.navigate("http://localhost:45691");
+                page.waitForFunction("document" +
+                        ".querySelector(\"body\")" +
+                        ".innerText" +
+                        ".includes(\"This is an internal server for BrowserStack Local\")");
+
+                markTestStatus("passed", "Local is up and running", page);
             } catch (Exception err) {
-                markTestStatus("failed", err.getMessage(), page);
+                markTestStatus("failed", "BrowserStack Local binary is not running", page);
             }
             browser.close();
 

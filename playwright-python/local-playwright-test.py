@@ -15,7 +15,7 @@ desired_cap = {
   'browserstack.accessKey': 'BROWSERSTACK_ACCESS_KEY'
 }
 
-def run_local_session():
+def run_local_session(playwright):
   clientPlaywrightVersion = str(subprocess.getoutput('playwright --version')).strip().split(" ")[1]
   desired_cap['client.playwrightVersion'] = clientPlaywrightVersion
 
@@ -23,13 +23,10 @@ def run_local_session():
   browser = playwright.chromium.connect(cdpUrl)
   page = browser.new_page()
   try:
-    page.goto("https://www.google.co.in/")
-    page.fill("[aria-label='Search']", 'Browserstack')
-    locator = page.locator("[aria-label='Google Search'] >> nth=0")
-    locator.click()
+    page.goto("http://localhost:45454")
     title = page.title()
 
-    if title == "Browserstack - Google Search":
+    if title == "BrowserStack Local":
       # following line of code is responsible for marking the status of the test on BrowserStack as 'passed'. You can use this code in your after hook after each test
       mark_test_status("passed", "Title matched", page)
     else:

@@ -27,33 +27,33 @@ def run_local_session(playwright):
     bs_local.start(**bs_local_args)
 
     # Check if BrowserStack local instance is running
-    print("BrowserStackLocal running: " + bs_local.isRunning())
+    print("BrowserStackLocal running: " + str(bs_local.isRunning()))
 
     clientPlaywrightVersion = str(subprocess.getoutput('playwright --version')).strip().split(" ")[1]
     desired_cap['client.playwrightVersion'] = clientPlaywrightVersion
-    
-    cdpUrl = 'wss://cdp.browserstack.com/playwright?caps=' + urllib.parse.quote(json.dumps(desired_cap))
-    browser = playwright.chromium.connect(cdpUrl)
-    page = browser.new_page()
-    try:
-      page.goto("https://www.google.co.in/")
-      page.fill("[aria-label='Search']", 'Browserstack')
-      locator = page.locator("[aria-label='Google Search'] >> nth=0")
-      locator.click()
-      title = page.title()
 
-      if title == "Browserstack - Google Search":
-        # following line of code is responsible for marking the status of the test on BrowserStack as 'passed'. You can use this code in your after hook after each test
-        mark_test_status("passed", "Title matched", page)
-      else:
-        mark_test_status("failed", "Title did not match", page)
-    except Exception as err:
-        mark_test_status("failed", str(err), page)
-    
-    browser.close()
-    
-    # Stop the Local instance
-    bs_local.stop()
+    try:
+      cdpUrl = 'wss://cdp.browserstack.com/playwright?caps=' + urllib.parse.quote(json.dumps(desired_cap))
+      browser = playwright.chromium.connect(cdpUrl)
+      page = browser.new_page()
+      try:
+        page.goto("http://localhost:45691")
+        page.main_frame.wait_for_function("""
+          document
+            .querySelector("body")
+            .innerText
+            .includes("This is an internal server for BrowserStack Local")
+        """)
+        mark_test_status("passed", "Local is up and running", page)
+      except Exception:
+        mark_test_status("failed", "BrowserStack Local binary is not running", page)
+      browser.close()
+    except Exception as ex:
+      print("Exception while creating page context: ", str(ex))
+    finally:
+      # Stop the Local instance
+      bs_local.stop()
+      print("BrowserStackLocal stopped")
 
 def mark_test_status(status, reason, page):
   page.evaluate("_ => {}", "browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\""+ status + "\", \"reason\": \"" + reason + "\"}}");
