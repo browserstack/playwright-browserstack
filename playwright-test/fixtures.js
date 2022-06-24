@@ -56,7 +56,8 @@ exports.test = base.test.extend({
           `wss://cdp.browserstack.com/playwright?caps=` +
           `${encodeURIComponent(JSON.stringify(caps))}`,
       });
-      const vPage = await vBrowser.newPage(testInfo.project.use);
+      const vContext = await vBrowser.newContext(testInfo.project.use);
+      const vPage = await vContext.newPage();
       await use(vPage);
       const testResult = {
         action: 'setSessionStatus',
