@@ -62,7 +62,7 @@ exports.test = base.test.extend({
       const testResult = {
         action: 'setSessionStatus',
         arguments: {
-          status: testInfo.status,
+          status: testInfo.status === "passed" ? "passed" : "failed",
           reason: nestedKeyValue(testInfo, ['error', 'message'])
         },
       };
