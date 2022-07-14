@@ -45,6 +45,15 @@ const patchCaps = (name, title) => {
 
 const isHash = (entity) => Boolean(entity && typeof(entity) === "object" && !Array.isArray(entity));
 const nestedKeyValue = (hash, keys) => keys.reduce((hash, key) => (isHash(hash) ? hash[key] : undefined), hash);
+const evaluateSessionsStatus = (status) => {
+  if (status === "passed") {
+    return "passed";
+  } else if (status === "failed" || status === "timedOut") {
+    return "failed";
+  } else {
+    return "";
+  }
+}
 
 exports.test = base.test.extend({
   page: async ({ page, playwright }, use, testInfo) => {
@@ -62,7 +71,7 @@ exports.test = base.test.extend({
       const testResult = {
         action: 'setSessionStatus',
         arguments: {
-          status: testInfo.status === "passed" ? "passed" : "skipped" ? "" : "failed",
+          status: evaluateSessionsStatus(testInfo.status),
           reason: nestedKeyValue(testInfo, ['error', 'message'])
         },
       };
