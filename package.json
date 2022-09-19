@@ -12,7 +12,7 @@
   },
   "scripts": {
     "test": "npm run single && npm run local && npm run parallel && npm run mobile",
-    "single": "node google_search.js",
+    "single": "node single_test.js",
     "local": "node local_test_using_bindings.js",
     "parallel": "node parallel_test.js",
     "mobile": "node sample_test_on_iPhone.js && node sample_test_on_Pixel.js",
