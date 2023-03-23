@@ -63,7 +63,7 @@ exports.test = base.test.extend({
   page: async ({ page, playwright }, use, testInfo) => {
     // Use BrowserStack Launched Browser according to capabilities for cross-browser testing.
     if (testInfo.project.name.match(/browserstack/)) {
-      patchCaps(testInfo.project.name, `${testInfo.file} - ${testInfo.title}`);
+      patchCaps(testInfo.project.name, `${testInfo.title}`);
       const vBrowser = await playwright.chromium.connect({
         wsEndpoint:
           `wss://cdp.browserstack.com/playwright?caps=` +
