@@ -10,9 +10,6 @@
 
 ## Running your tests
 
-- To run a single test, run 
-  `mvn -Dexec.mainClass="com.browserstack.PlaywrightSingleTest" -Dexec.classpathScope=test test-compile exec:java
-`
 - To run parallel tests, run 
   `mvn -Dexec.mainClass="com.browserstack.PlaywrightParallelTest" -Dexec.classpathScope=test test-compile exec:java
 `
