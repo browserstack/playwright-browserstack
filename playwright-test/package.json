@@ -1,5 +1,5 @@
 {
-  "name": "@playwright/test",
+  "name": "browserstack-playwright-sample",
   "version": "1.0.0",
   "author": "Karan Shah",
   "engines": {
@@ -11,8 +11,8 @@
     "test:local": "BROWSERSTACK_LOCAL=true npx playwright test --config=./playwright-local.config.js"
   },
   "devDependencies": {
-    "playwright": "~1.17.2",
-    "@playwright/test": "~1.17.2",
+    "playwright": "~1.34.1",
+    "@playwright/test": "~1.34.1",
     "browserstack-local": "^1.4.8"
   }
 }

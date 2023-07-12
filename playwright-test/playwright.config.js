@@ -48,6 +48,13 @@ const config = {
         // ...devices['iPhone 12 Pro Max'],
       },
     },
+    {
+      name: 'chrome@Samsung Galaxy S22:13@browserstack-mobile',
+      use: {
+        browserName: 'chromium',
+        channel: 'chrome'
+      },
+    },
     // -- Local Projects --
 
     // Test against playwright browsers
