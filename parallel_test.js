@@ -67,7 +67,7 @@ const capabilities = [
     'browser': 'playwright-chromium',  // allowed browsers are `chrome`, `edge`, `playwright-chromium`, `playwright-firefox` and `playwright-webkit`
     'os': 'osx',
     'os_version': 'Catalina',
-    'name': 'Chrome on Win10',
+    'name': 'Playwright chromium on Catalina',
     'build': 'playwright-build-2'
 }]
 
