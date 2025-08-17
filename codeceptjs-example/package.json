@@ -13,7 +13,7 @@
     "devDependencies": {
         "@codeceptjs/configure": "^0.6.2",
         "@codeceptjs/examples": "^1.2.1",
-        "@codeceptjs/ui": "^0.4.6",
+        "@codeceptjs/ui": "^1.2.5",
         "codeceptjs": "^3.1.3",
         "playwright": "~1.17.2"
     }
